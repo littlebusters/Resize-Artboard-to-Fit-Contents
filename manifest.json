@@ -16,16 +16,37 @@
    },
    "uiEntryPoints":[
       {
-         "type":"menu",
+         "type": "menu",
          "label": {
-            "default": "Resize Artboard to Fit Contents",
-            "ja": "アートボードをコンテンツに合わせる"
+            "default": "Resize Artboard",
+            "ja": "アートボードリサイズ"
          },
-         "commandId":"ResizeToFit",
-         "shortcut": {
-            "mac": "Ctrl+F",
-            "win": "Ctrl+F"
-         }
+         "menuItems": [
+            {
+               "type": "menu",
+               "label": {
+                  "default": "Resize Artboard to Fit Contents",
+                  "ja": "アートボードをコンテンツに合わせる"
+               },
+               "commandId": "ResizeToFit",
+               "shortcut": {
+                  "mac": "Ctrl+F",
+                  "win": "Ctrl+F"
+               }
+            },
+            {
+               "type": "menu",
+               "label": {
+                  "default": "Settings...",
+                  "ja": "設定…"
+               },
+               "commandId": "ResizeToFitSettings",
+               "shortcut": {
+                  "mac": "Ctrl+R",
+                  "win": "Ctrl+R"
+               }
+            }
+         ]
       }
    ]
 }
