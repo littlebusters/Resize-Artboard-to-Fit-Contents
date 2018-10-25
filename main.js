@@ -6,10 +6,8 @@ console.log('-----');
 
 async function resizeToFit(selection) {
     let sel = selection.items;
-    console.log(1);
     let config = await readConfig();
     console.log(config);
-    console.log(config.width);
 
     for (let selLng = 0; selLng < sel.length; selLng++) {
         let node = sel[selLng];
@@ -28,10 +26,27 @@ async function resizeToFit(selection) {
             });
             node.children.forEach(function (childNode) {
                 let bounds = childNode.boundsInParent;
-                childNode.moveInParentCoordinates(-(minX), -(minY));
+                let objX = -minX;
+                let objY = -minY;
+                if (0 < config.width) objX = 0;
+                if (0 < config.height) objY = 0;
+                console.log(objX + ' / ' + objY + '  |  ' + minX + ' / ' + minY + '  |  ' + maxX + ' / ' + maxY);
+                childNode.moveInParentCoordinates(objX, objY);
             });
+            let width = maxX - minX;
+            let height = maxY - minY;
+            if (0 < config.width) {
+                width = config.width;
+                minX = 0;
+                minY = 0;
+            }
+            if (0 < config.height) {
+                height = config.height;
+                minX = 0;
+                minY = 0;
+            }
 
-            node.resize(maxX - minX, maxY - minY);
+            node.resize(width, height + config.offsetBottom);
             node.moveInParentCoordinates(minX, minY);
         }
 
@@ -172,7 +187,6 @@ async function readConfig() {
     }
     if (entry) {
         console.log('Read config file');
-        // console.log(entry);
         return JSON.parse(entry);
     } else {
         console.log('Config file not found');
