@@ -7,7 +7,7 @@ console.log('-----');
 async function resizeToFit(selection) {
     let sel = selection.items;
     console.log(1);
-    let config = JSON.parse(await readConfig());
+    let config = await readConfig();
     console.log(config);
     console.log(config.width);
 
@@ -48,36 +48,34 @@ async function resizeToFitPluginSettings() {
         const result = await dialog.showModal();
         console.log(result);
         if ('reasonCanceled' !== result) {
+            console.log('-->');
+            console.log(defaultVal);
             let config = {}
             config.width = (checkValue(result.width)) ? Math.abs(result.width - 0) : defaultVal.width;
             config.height = (checkValue(result.height)) ? Math.abs(result.height - 0) : defaultVal.height;
             config.offsetBottom = (checkValue(result.offsetBottom)) ? result.offsetBottom - 0 : defaultVal.offsetBottom;
             await writeConfig(config)
             console.log(config);
+        } else {
+            console.log('Canceled');
         }
     } catch (e) {
-        console.log('Catch');
         console.log(e);
     }
 
 }
 
 function checkValue(val) {
-    console.log('-> checkValue')
-    console.log(val);
     if (isNaN(val - 0)) {
-        console.log('Not number');
         return false;
     } else {
-        console.log('isNumber');
         return true;
     }
 }
 
 const dom = sel => document.querySelector(sel);
-function createDialog(defautlVal) {
-    console.log('-> Run createDialog')
-    const defaultVal = JSON.parse(defautlVal);
+function createDialog(defaultVal) {
+    console.log('-> Run createDialog');
     console.log(defaultVal);
 
     document.body.innerHTML = `
@@ -95,10 +93,6 @@ function createDialog(defautlVal) {
     input {
         width: 70px;
     }
-    .formgroup,
-    .container, {
-        display: flex;
-    }
     .formgroup {
         padding: 0 8px 8px;
     }
@@ -110,19 +104,19 @@ function createDialog(defautlVal) {
 	<form id="form" method="dialog">
 		<h1 id="title">Resize Artboard to Fit Content Settings</h1>
 		<h2>Fix values</h2>
-		<div class="formgroup">
-            <div class="container">
+		<div class="formgroup row">
+            <div class="row">
                 <label for="width">Width</label>
                 <input id="width" type="number" step="1" placeholder="0" value="${defaultVal.width}" />
             </div>
-            <div class="container">
+            <div class="row">
                 <label for="height">Height</label>
                 <input id="height" type="number" step="1" placeholder="0" value="${defaultVal.height}" />
             </div>
         </div>
 		<h2>Offset bounding</h2>
-		<div class="formgroup">
-            <div class="container">
+		<div class="formgroup row">
+            <div class="row">
                 <label for="offsetBottom">Bottom</label>
                 <input id="offsetBottom" type="number" step="1" placeholder="0" value="${defaultVal.offsetBottom}" />
             </div>
@@ -143,23 +137,27 @@ function createDialog(defautlVal) {
     const cancel = dom('#cancel');
     const ok = dom('#ok');
 
-    cancel.onClick = function() {
-        dialog.close();
-    };
-    ok.onClick = form.onsubmit = function(e) {
+    const cancelDialog = () => dialog.close('reasonCanceled');
+    cancel.addEventListener('click', cancelDialog);
+    cancel.addEventListener('keypress', cancelDialog);
+
+    const confirmedDialog = (e) => {
+        console.log('confirmedDialog');
         let config = {};
         config.width = width.value;
         config.height = height.value;
         config.offsetBottom = offsetBottom.value;
         dialog.close(config);
         e.preventDefault();
-    };
+    }
+    ok.addEventListener('click', confirmedDialog);
+    ok.addEventListener('keypress', confirmedDialog);
+
+    form.onsubmit = confirmedDialog;
 
     return dialog;
 
 }
-
-
 
 async function readConfig() {
     const pluginDataFolder = await fs.getDataFolder();
@@ -174,8 +172,8 @@ async function readConfig() {
     }
     if (entry) {
         console.log('Read config file');
-        console.log(entry);
-        return entry;
+        // console.log(entry);
+        return JSON.parse(entry);
     } else {
         console.log('Config file not found');
         let defaultVal = {"width": 0, "height": 0, "offsetBottom": 0};
