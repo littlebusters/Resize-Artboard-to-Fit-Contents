@@ -1,0 +1,9 @@
+{
+  "title": "Resize Artboard to Fit Content Settings",
+  "labelSize": "Fix values",
+  "labelSizeWidth": "Width",
+  "labelSizeHeight": "Height",
+  "labelOffset": "Offset Bounding",
+  "labelOffsetBottom": "Bottom",
+  "note": "\"0\" is follows the size of the content."
+}

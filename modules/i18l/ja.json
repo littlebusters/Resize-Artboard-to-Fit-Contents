@@ -1,0 +1,9 @@
+{
+  "title": "設定",
+  "labelSize": "サイズ固定",
+  "labelSizeWidth": "幅",
+  "labelSizeHeight": "高さ",
+  "labelOffset": "オフセット",
+  "labelOffsetBottom": "下辺",
+  "note": "0を入力すると、コンテンツに合わせます。"
+}
