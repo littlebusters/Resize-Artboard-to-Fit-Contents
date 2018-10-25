@@ -1,6 +1,8 @@
 const Artboard = require("scenegraph").Artboard;
 const fs = require("uxp").storage.localFileSystem;
 const configFile = 'config.json';
+const {uiLabel} = require('./modules/i18l');
+console.log(uiLabel);
 
 console.log('-----');
 
