@@ -1,11 +1,18 @@
 let application = require("application");
 
-function getUiLabel(appLang) {
+function getUiLabel(appLang = 'en') {
     if ('en' === appLang) appLang = 'default';
     let langFilePath = './i18l/' + appLang + '.json';
-    let label = require(langFilePath);
+    try {
+        let label = require(langFilePath);
+        return label;
+    }
+    catch (e) {
+        langFilePath = './i18l/default.json';
+        let defaultLabel = require(langFilePath);
 
-    return label;
+        return defaultLabel;
+    }
 }
 const uiLabel = getUiLabel(application.appLanguage);
 
