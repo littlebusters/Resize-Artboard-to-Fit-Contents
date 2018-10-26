@@ -9,7 +9,6 @@ console.log('-----');
 async function resizeToFit(selection) {
     let sel = selection.items;
     let config = await readConfig();
-    console.log(config);
 
     for (let selLng = 0; selLng < sel.length; selLng++) {
         let node = sel[selLng];
@@ -19,6 +18,7 @@ async function resizeToFit(selection) {
         let maxY = 0;
 
         if (node instanceof Artboard && 0 < node.children.length) {
+            // Get objects bounding in Artboard
             node.children.forEach(function (childNode) {
                 let bounds = childNode.boundsInParent;
                 if (minX > bounds.x) minX = bounds.x;
@@ -26,8 +26,9 @@ async function resizeToFit(selection) {
                 if (minY > bounds.y) minY = bounds.y;
                 if (maxY < bounds.y + bounds.height) maxY = bounds.y + bounds.height;
             });
+
+            // Move objects in Artboard
             node.children.forEach(function (childNode) {
-                let bounds = childNode.boundsInParent;
                 let objX = -minX;
                 let objY = -minY;
                 if (0 < config.width) objX = 0;
@@ -35,6 +36,8 @@ async function resizeToFit(selection) {
                 console.log(objX + ' / ' + objY + '  |  ' + minX + ' / ' + minY + '  |  ' + maxX + ' / ' + maxY);
                 childNode.moveInParentCoordinates(objX, objY);
             });
+
+            // Get Artboard bounding
             let width = maxX - minX;
             let height = maxY - minY;
             if (0 < config.width) {
@@ -48,6 +51,7 @@ async function resizeToFit(selection) {
                 minY = 0;
             }
 
+            // Resize and move Artboard
             node.resize(width, height + config.offsetBottom);
             node.moveInParentCoordinates(minX, minY);
         }
@@ -56,23 +60,19 @@ async function resizeToFit(selection) {
 }
 
 async function resizeToFitPluginSettings() {
-    console.log('Start readConfig');
     const defaultVal = await readConfig();
-    console.log('createDialog');
     const dialog = createDialog(defaultVal);
+
     try {
-        console.log('showModal');
         const result = await dialog.showModal();
         console.log(result);
         if ('reasonCanceled' !== result) {
-            console.log('-->');
-            console.log(defaultVal);
-            let config = {}
+            let config = {};
+            // Confirm return value
             config.width = (checkValue(result.width)) ? Math.abs(result.width - 0) : defaultVal.width;
             config.height = (checkValue(result.height)) ? Math.abs(result.height - 0) : defaultVal.height;
             config.offsetBottom = (checkValue(result.offsetBottom)) ? result.offsetBottom - 0 : defaultVal.offsetBottom;
             await writeConfig(config)
-            console.log(config);
         } else {
             console.log('Canceled');
         }
@@ -92,8 +92,6 @@ function checkValue(val) {
 
 const dom = sel => document.querySelector(sel);
 function createDialog(defaultVal) {
-    console.log('-> Run createDialog');
-    console.log(defaultVal);
 
     document.body.innerHTML = `
 <style>
@@ -154,12 +152,13 @@ function createDialog(defaultVal) {
     const cancel = dom('#cancel');
     const ok = dom('#ok');
 
+    // Cancel button event
     const cancelDialog = () => dialog.close('reasonCanceled');
     cancel.addEventListener('click', cancelDialog);
     cancel.addEventListener('keypress', cancelDialog);
 
+    // OK button event
     const confirmedDialog = (e) => {
-        console.log('confirmedDialog');
         let config = {};
         config.width = width.value;
         config.height = height.value;
@@ -180,18 +179,19 @@ async function readConfig() {
     const pluginDataFolder = await fs.getDataFolder();
     const entries = await pluginDataFolder.getEntries();
     let entry;
+
+    // Seek a config.json
     for (let i = 0; i < entries.length; i++) {
         if (configFile === entries[i].name) {
-            console.log('Config file Found');
             entry = await entries[i].read();
             break;
         }
     }
+
     if (entry) {
-        console.log('Read config file');
         return JSON.parse(entry);
     } else {
-        console.log('Config file not found');
+        // Set and return default values if config.json is not found
         let defaultVal = {"width": 0, "height": 0, "offsetBottom": 0};
         const buffer = await pluginDataFolder.createFile(configFile);
         buffer.write(JSON.stringify(defaultVal));
@@ -204,20 +204,21 @@ async function writeConfig(val) {
     const pluginDataFolder = await fs.getDataFolder();
     const entries = await pluginDataFolder.getEntries();
     let entry;
+
+    // Seek a config.json
     for (let i = 0; i < entries.length; i++) {
         if (configFile === entries[i].name) {
-            console.log('Config file Found');
             entry = await entries[i];
             break;
         }
     }
+
     if (entry) {
-        console.log('Write config file');
         entry.write(JSON.stringify(val));
 
         return true;
     } else {
-        console.log('Config file not found');
+        // Create file and write value if config.json is not found
         const buffer = await pluginDataFolder.createFile(configFile);
         buffer.write(JSON.stringify(val));
 
