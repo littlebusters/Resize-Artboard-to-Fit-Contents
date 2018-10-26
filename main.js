@@ -1,8 +1,6 @@
 const Artboard = require("scenegraph").Artboard;
 const {checkValue, createDialog, readConfig, writeConfig} = require('./modules/helper');
 
-console.log('-----');
-
 async function resizeToFit(selection) {
     let sel = selection.items;
     let config = await readConfig();
@@ -52,7 +50,6 @@ async function resizeToFit(selection) {
             node.resize(width, height + config.offsetBottom);
             node.moveInParentCoordinates(minX, minY);
         }
-
     }
 }
 
@@ -65,7 +62,7 @@ async function resizeToFitPluginSettings() {
         console.log(result);
         if ('reasonCanceled' !== result) {
             let config = {};
-            // Confirm return value
+            // Verify return value
             config.width = (checkValue(result.width)) ? Math.abs(result.width - 0) : defaultVal.width;
             config.height = (checkValue(result.height)) ? Math.abs(result.height - 0) : defaultVal.height;
             config.offsetBottom = (checkValue(result.offsetBottom)) ? result.offsetBottom - 0 : defaultVal.offsetBottom;
