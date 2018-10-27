@@ -3,7 +3,7 @@ const configFile = 'config.json';
 const dom = sel => document.querySelector(sel);
 const {uiLabel} = require('./i18l');
 
-function checkValue(val) {
+function validateNum(val) {
     if (isNaN(val - 0)) {
         return false;
     } else {
@@ -147,7 +147,7 @@ async function writeConfig(val) {
 }
 
 module.exports = {
-    checkValue,
+    validateNum,
     createDialog,
     readConfig,
     writeConfig
