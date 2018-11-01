@@ -41,10 +41,7 @@
                   "ja": "設定…"
                },
                "commandId": "ResizeToFitSettings",
-               "shortcut": {
-                  "mac": "Ctrl+R",
-                  "win": "Ctrl+R"
-               }
+               "shortcut": {}
             }
          ]
       }
