@@ -96,20 +96,10 @@ function createDialog(defaultVal) {
 }
 
 async function readConfig() {
-    const pluginDataFolder = await fs.getDataFolder();
-    const entries = await pluginDataFolder.getEntries();
-    let entry;
-
-    // Seek a config.json
-    for (let i = 0; i < entries.length; i++) {
-        if (configFile === entries[i].name) {
-            entry = await entries[i].read();
-            break;
-        }
-    }
+    let entry = await openFile();
 
     if (entry) {
-        return JSON.parse(entry);
+        return JSON.parse(await entry.read());
     } else {
         // Set and return default values if config.json is not found
         let defaultVal = {"width": 0, "height": 0, "offsetBottom": 0};
@@ -121,20 +111,10 @@ async function readConfig() {
 }
 
 async function writeConfig(val) {
-    const pluginDataFolder = await fs.getDataFolder();
-    const entries = await pluginDataFolder.getEntries();
-    let entry;
-
-    // Seek a config.json
-    for (let i = 0; i < entries.length; i++) {
-        if (configFile === entries[i].name) {
-            entry = await entries[i];
-            break;
-        }
-    }
+    let entry = await openFile();
 
     if (entry) {
-        entry.write(JSON.stringify(val));
+        await entry.write(JSON.stringify(val));
 
         return true;
     } else {
@@ -144,6 +124,20 @@ async function writeConfig(val) {
 
         return true;
     }
+}
+
+async function openFile() {
+    const pluginDataFolder = await fs.getDataFolder();
+    const entries = await pluginDataFolder.getEntries();
+
+    // Seek a config.json
+    for (let i = 0; i < entries.length; i++) {
+        if (configFile === entries[i].name) {
+            return await entries[i];
+        }
+    }
+
+    return false;
 }
 
 module.exports = {
