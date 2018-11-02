@@ -1,5 +1,5 @@
 {
-   "name": "Resize Artboard to Fit Contents",
+   "name": "Resize Artboard to Fit Content",
    "id": "d632ca4d",
    "version":"1.1.0",
    "description":"Resize the artboard to fit the boundary of Contents in the artboard.",
@@ -25,7 +25,7 @@
             {
                "type": "menu",
                "label": {
-                  "default": "Resize Artboard to Fit Contents",
+                  "default": "Resize Artboard to Fit Content",
                   "ja": "アートボードをコンテンツに合わせる"
                },
                "commandId": "ResizeToFit",
