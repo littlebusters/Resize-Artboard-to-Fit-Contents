@@ -5,5 +5,9 @@
   "labelSizeHeight": "Height",
   "labelOffset": "Offset Bounding",
   "labelOffsetBottom": "Bottom",
-  "note": "\"0\" is follows the size of the content."
+  "note": "\"0\" is follows the size of the content.",
+  "notArtboardTitle": "Not Artboards",
+  "notArtboardBody": "No Artboard in selection. Please select Artboards.",
+  "noSelectionTitle": "Artboard not selected",
+  "noSelectionBody": "Artboard is not selected. Please select Artboards."
 }

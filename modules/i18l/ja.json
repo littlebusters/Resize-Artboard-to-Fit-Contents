@@ -5,5 +5,9 @@
   "labelSizeHeight": "高さ",
   "labelOffset": "オフセット",
   "labelOffsetBottom": "下辺",
-  "note": "0を入力すると、コンテンツに合わせます。"
+  "note": "0を入力すると、コンテンツに合わせます。",
+  "notArtboardTitle": "選択範囲にアートボードがありません",
+  "notArtboardBody": "アートボードを選択してください。（複数可）",
+  "noSelectionTitle": "アートボードが選択されていません",
+  "noSelectionBody": "アートボードを選択してください。（複数可）"
 }

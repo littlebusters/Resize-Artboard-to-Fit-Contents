@@ -1,18 +1,24 @@
 const Artboard = require("scenegraph").Artboard;
-const {validateNum, createDialog, readConfig, writeConfig} = require('./modules/helper');
+const {validateNum, createDialog, readConfig, writeConfig, createAlert} = require('./modules/helper');
 
 async function resizeToFit(selection) {
     let sel = selection.items;
+    const selCount = sel.length;
+    if(!selCount) {
+        const dialog = createAlert('noSelectionTitle', 'noSelectionBody');
+		dialog.showModal();
+        return false;
+    }
     let config = await readConfig();
 
-    for (let selLng = 0; selLng < sel.length; selLng++) {
+    for (let selLng = 0; selLng < selCount; selLng++) {
         let node = sel[selLng];
         let minX = node.boundsInParent.width;
         let minY = node.boundsInParent.height;
         let maxX = 0;
         let maxY = 0;
 
-        if (node instanceof Artboard && 0 < node.children.length) {
+        if (node instanceof Artboard) {
             // Get objects bounding in Artboard
             node.children.forEach(function (childNode) {
                 let bounds = childNode.boundsInParent;
@@ -49,6 +55,10 @@ async function resizeToFit(selection) {
             // Resize and move Artboard
             node.resize(width, height + config.offsetBottom);
             node.moveInParentCoordinates(minX, minY);
+        } else {
+			const dialog = createAlert('notArtboardTitle', 'notArtboardBody');
+			dialog.showModal();
+			break;
         }
     }
 }
