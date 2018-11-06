@@ -1,7 +1,7 @@
 {
    "name": "Resize Artboard to Fit Content",
    "id": "d632ca4d",
-   "version":"1.1.2",
+   "version":"1.1.3",
    "description":"Resize the artboard to fit the boundary of Contents in the artboard.",
    "icons":[
       {
