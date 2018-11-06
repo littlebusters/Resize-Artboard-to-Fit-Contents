@@ -128,6 +128,11 @@ function createAlert(title, msg) {
 	<div class="plugin-icon"></div>
 </dialog>
 `;
+	const ok = dom('#ok');
+	const cancelDialog = () => dialog.close();
+	ok.addEventListener('click', cancelDialog);
+	ok.addEventListener('keypress', cancelDialog);
+
 	return dom('#dialog');
 }
 
