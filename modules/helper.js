@@ -2,6 +2,7 @@ const fs = require("uxp").storage.localFileSystem;
 const configFile = 'config.json';
 const dom = sel => document.querySelector(sel);
 const {uiLabel} = require('./i18l');
+const pluginIcon = '../images/resize-to-fit-icon.png';
 
 function validateNum(val) {
     if (isNaN(val - 0)) {
@@ -15,8 +16,14 @@ function createDialog(defaultVal) {
 
     document.body.innerHTML = `
 <style>
+    dialog {
+        display: flex;
+        flex-direction: row-reverse;
+    }
     #title {
         margin-bottom: 16px;
+        padding-bottom: 7px;
+        border-bottom: 1px solid #ccc;
         font-size: 16px;
     }
     h2 {
@@ -33,6 +40,15 @@ function createDialog(defaultVal) {
     }
     .note {
         font-size: 12px;
+    }
+    .plugin-icon {
+        width: 48px;
+        height: 48px;
+        margin-right: 16px;
+        border-radius: 4px;
+        background-image: url(${pluginIcon});
+        background-repeat: no-repeat;
+        background-size: cover;
     }
 </style>
 <dialog id="dialog">
@@ -62,6 +78,7 @@ function createDialog(defaultVal) {
 			<button id="ok" type="submit" uxp-variant="cta">OK</button>
 		</footer>
 	</form>
+	<div class="plugin-icon"></div>
 </dialog>
 `;
     const dialog = dom('#dialog');
@@ -112,7 +129,7 @@ function createAlert(title, msg) {
         height: 48px;
         margin-right: 16px;
         border-radius: 4px;
-        background-image: url(../images/resize-to-fit-icon.png);
+        background-image: url(${pluginIcon});
         background-repeat: no-repeat;
         background-size: cover;
     }
