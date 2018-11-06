@@ -63,7 +63,7 @@ function createDialog(defaultVal) {
 		</footer>
 	</form>
 </dialog>
-`
+`;
     const dialog = dom('#dialog');
     const form = dom('#form');
     const width = dom('#width');
@@ -85,7 +85,7 @@ function createDialog(defaultVal) {
         config.offsetBottom = offsetBottom.value;
         dialog.close(config);
         e.preventDefault();
-    }
+    };
     ok.addEventListener('click', confirmedDialog);
     ok.addEventListener('keypress', confirmedDialog);
 
@@ -103,6 +103,7 @@ async function readConfig() {
     } else {
         // Set and return default values if config.json is not found
         let defaultVal = {"width": 0, "height": 0, "offsetBottom": 0};
+        const pluginDataFolder = await fs.getDataFolder();
         const buffer = await pluginDataFolder.createFile(configFile);
         buffer.write(JSON.stringify(defaultVal));
 
@@ -119,6 +120,7 @@ async function writeConfig(val) {
         return true;
     } else {
         // Create file and write value if config.json is not found
+        const pluginDataFolder = await fs.getDataFolder();
         const buffer = await pluginDataFolder.createFile(configFile);
         buffer.write(JSON.stringify(val));
 
