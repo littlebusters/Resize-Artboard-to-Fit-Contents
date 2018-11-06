@@ -18,7 +18,7 @@
       {
          "type": "menu",
          "label": {
-            "default": "Resize Artboard",
+            "default": "Resize Artboard to Fit Content",
             "ja": "アートボードリサイズ"
          },
          "menuItems": [
