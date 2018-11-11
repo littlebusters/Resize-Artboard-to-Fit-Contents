@@ -1,4 +1,4 @@
-# Resize Artboard to Fit Contents for Adobe XD Plugin
+# Resize Artboard to Fit Contents for Adobe XD
 
 Resize the artboard to fit the boundary of Contents in the artboard in Adobe DX. (like a "Resize to Fit" in Sketch.app)
 
@@ -10,6 +10,11 @@ Resize the artboard to fit the boundary of Contents in the artboard in Adobe DX.
 If you need to fix the Artboard size, you can fix it by "Settings...". 
 
 ## Installation
+
+### on XD
+1. Open the Plugin panel from "Plugins > Discover Plugins...".
+2. Type "resize artboard" on the search box.
+3. Click to "Install" if find the this plugin.
 
 ### manually
 
