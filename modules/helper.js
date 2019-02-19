@@ -190,17 +190,17 @@ async function writeConfig(val) {
 }
 
 async function openFile() {
-    const pluginDataFolder = await fs.getDataFolder();
-    const entries = await pluginDataFolder.getEntries();
+	const pluginDataFolder = await fs.getDataFolder();
+	const entries = await pluginDataFolder.getEntries();
 
-    // Seek a config.json
-    for (let i = 0; i < entries.length; i++) {
-        if (configFile === entries[i].name) {
-            return await entries[i];
-        }
-    }
+	// Seek a config.json
+	for (const entry of entries) {
+		if (configFile === entry.name) {
+			return entry;
+		}
+	}
 
-    return false;
+	return false;
 }
 
 module.exports = {
