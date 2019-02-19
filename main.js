@@ -5,8 +5,8 @@ async function resizeToFit(selection) {
     let sel = selection.items;
     const selCount = sel.length;
     if(!selCount) {
-        const dialog = createAlert('noSelectionTitle', 'noSelectionBody');
-		dialog.showModal();
+        const dialog = createAlert('ALERT_NO_SELECTION_ARTBOARD_TITLE', 'ALERT_NO_SELECTION_ARTBOARD_BODY');
+		    dialog.showModal();
         return false;
     }
     let config = await readConfig();
@@ -56,7 +56,7 @@ async function resizeToFit(selection) {
             node.resize(width, height + config.offsetBottom);
             node.moveInParentCoordinates(minX, minY);
         } else {
-			const dialog = createAlert('notArtboardTitle', 'notArtboardBody');
+			const dialog = createAlert('ALERT_NO_ARTBOARD_TITLE', 'ALERT_NO_ARTBOARD_BODY');
 			dialog.showModal();
 			break;
         }

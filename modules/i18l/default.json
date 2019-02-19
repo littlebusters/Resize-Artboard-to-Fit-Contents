@@ -1,13 +1,13 @@
 {
-  "title": "Resize Artboard to Fit Content Settings",
-  "labelSize": "Fix values",
-  "labelSizeWidth": "Width",
-  "labelSizeHeight": "Height",
-  "labelOffset": "Offset Bounding",
-  "labelOffsetBottom": "Bottom",
-  "note": "\"0\" is follows the size of the content.",
-  "notArtboardTitle": "Not Artboards",
-  "notArtboardBody": "No Artboard in selection. Please select Artboards.",
-  "noSelectionTitle": "Artboard not selected",
-  "noSelectionBody": "Artboard is not selected. Please select Artboards."
+  "SETTING_TITLE": "Resize Artboard to Fit Content Settings",
+  "SETTING_LABEL_FIXED_SIZE": "Fix values",
+  "SETTING_LABEL_SIZE_WIDTH": "Width",
+  "SETTING_LABEL_SIZE_HEIGHT": "Height",
+  "SETTING_LABEL_OFFSET": "Offset Bounding",
+  "SETTING_LABEL_OFFSET_BOTTOM": "Bottom",
+  "SETTING_NOTE": "\"0\" is follows the size of the content.",
+  "ALERT_NO_ARTBOARD_TITLE": "Not Artboards",
+  "ALERT_NO_ARTBOARD_BODY": "No Artboard in selection. Please select Artboards.",
+  "ALERT_NO_SELECTION_ARTBOARD_TITLE": "Artboard not selected",
+  "ALERT_NO_SELECTION_ARTBOARD_BODY": "Artboard is not selected. Please select Artboards."
 }

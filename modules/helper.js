@@ -53,26 +53,26 @@ function createDialog(defaultVal) {
 </style>
 <dialog id="dialog">
 	<form id="form" method="dialog">
-		<h1 id="title">${uiLabel.title}</h1>
-		<h2>${uiLabel.labelSize}</h2>
+		<h1 id="title">${uiLabel.SETTING_TITLE}</h1>
+		<h2>${uiLabel.SETTING_LABEL_FIXED_SIZE}</h2>
 		<div class="formgroup row">
             <div class="row">
-                <label for="width">${uiLabel.labelSizeWidth}</label>
+                <label for="width">${uiLabel.SETTING_LABEL_SIZE_WIDTH}</label>
                 <input id="width" type="number" step="1" placeholder="0" value="${defaultVal.width}" />
             </div>
             <div class="row">
-                <label for="height">${uiLabel.labelSizeHeight}</label>
+                <label for="height">${uiLabel.SETTING_LABEL_SIZE_HEIGHT}</label>
                 <input id="height" type="number" step="1" placeholder="0" value="${defaultVal.height}" />
             </div>
         </div>
-		<h2>${uiLabel.labelOffset}</h2>
+		<h2>${uiLabel.SETTING_LABEL_OFFSET}</h2>
 		<div class="formgroup row">
             <div class="row">
-                <label for="offsetBottom">${uiLabel.labelOffsetBottom}</label>
+                <label for="offsetBottom">${uiLabel.SETTING_LABEL_OFFSET_BOTTOM}</label>
                 <input id="offsetBottom" type="number" step="1" placeholder="0" value="${defaultVal.offsetBottom}" />
             </div>
 		</div>
-        <p class="note">${uiLabel.note}</p>
+        <p class="note">${uiLabel.SETTING_NOTE}</p>
 		<footer>
 			<button id="cancel">Cancel</button>
 			<button id="ok" type="submit" uxp-variant="cta">OK</button>
@@ -158,8 +158,10 @@ async function readConfig() {
     let entry = await openFile();
 
     if (entry) {
+        console.log('true');
         return JSON.parse(await entry.read());
     } else {
+			console.log('false');
         // Set and return default values if config.json is not found
         let defaultVal = {"width": 0, "height": 0, "offsetBottom": 0};
         const pluginDataFolder = await fs.getDataFolder();

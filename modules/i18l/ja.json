@@ -1,13 +1,13 @@
 {
-  "title": "リサイズ時の設定",
-  "labelSize": "サイズ固定",
-  "labelSizeWidth": "幅",
-  "labelSizeHeight": "高さ",
-  "labelOffset": "オフセット",
-  "labelOffsetBottom": "下辺",
-  "note": "0を入力すると、コンテンツに合わせます。",
-  "notArtboardTitle": "選択範囲にアートボードがありません",
-  "notArtboardBody": "アートボードを選択してください。（複数可）",
-  "noSelectionTitle": "アートボードが選択されていません",
-  "noSelectionBody": "アートボードを選択してください。（複数可）"
+  "SETTING_TITLE": "リサイズ時の設定",
+  "SETTING_LABEL_FIXED_SIZE": "サイズ固定",
+  "SETTING_LABEL_SIZE_WIDTH": "幅",
+  "SETTING_LABEL_SIZE_HEIGHT": "高さ",
+  "SETTING_LABEL_OFFSET": "オフセット",
+  "SETTING_LABEL_OFFSET_BOTTOM": "下辺",
+  "SETTING_NOTE": "0を入力すると、コンテンツに合わせます。",
+  "ALERT_NO_ARTBOARD_TITLE": "選択範囲にアートボードがありません",
+  "ALERT_NO_ARTBOARD_BODY": "アートボードを選択してください。（複数可）",
+  "ALERT_NO_SELECTION_ARTBOARD_TITLE": "アートボードが選択されていません",
+  "ALERT_NO_SELECTION_ARTBOARD_BODY": "アートボードを選択してください。（複数可）"
 }
