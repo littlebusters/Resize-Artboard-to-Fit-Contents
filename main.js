@@ -11,8 +11,8 @@ async function resizeToFit(selection) {
 	}
 	let config = await readConfig();
 
-	for (let selLng = 0; selLng < selCount; selLng++) {
-		let node = sel[selLng];
+	for (let node of sel) {
+		if (0 === node.children.length) continue;
 		let minX = node.boundsInParent.width;
 		let minY = node.boundsInParent.height;
 		let maxX = 0;
