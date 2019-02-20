@@ -14,6 +14,8 @@ function validateNum(val) {
 }
 
 function createDialog(defaultVal) {
+	let keep_width_checked = (defaultVal.keepCurrent) ? ' checked' : '';
+	let width_disabled = (defaultVal.keepCurrent) ? ' disabled' : '';
 
 	document.body.innerHTML = `
 <style>
@@ -33,11 +35,18 @@ function createDialog(defaultVal) {
     label {
         padding-top: 8px;
     }
-    input {
+    .text-numeric {
         width: 70px;
+        margin-left: 5px;
     }
     .formgroup {
         padding: 0 8px 8px;
+    }
+    .keep-current {
+    		display: inline;
+    }
+    .keep-current__text {
+    		font-size: 14px;
     }
     .note {
         font-size: 12px;
@@ -55,25 +64,32 @@ function createDialog(defaultVal) {
 <dialog id="dialog">
 	<form id="form" method="dialog">
 		<h1 id="title">${uiLabel.SETTING_TITLE}</h1>
+		<h2>${uiLabel.SETTING_KEEP_CURRENT_ARTBOARD_WIDTH_TITLE}</h2>
+		<div class="formgroup">
+			<label for="keep_current_width" class="row">
+				<input class="keep-current" type="checkbox" id="keep_current_width" value="keep_current_width"${keep_width_checked}>
+				<span class="keep-current__text">${uiLabel.SETTING_KEEP_CURRENT_ARTBOARD_WIDTH}</span>
+			</label>
+		</div>
 		<h2>${uiLabel.SETTING_LABEL_FIXED_SIZE}</h2>
 		<div class="formgroup row">
-            <div class="row">
-                <label for="width">${uiLabel.SETTING_LABEL_SIZE_WIDTH}</label>
-                <input id="width" type="number" step="1" placeholder="0" value="${defaultVal.width}" />
-            </div>
-            <div class="row">
-                <label for="height">${uiLabel.SETTING_LABEL_SIZE_HEIGHT}</label>
-                <input id="height" type="number" step="1" placeholder="0" value="${defaultVal.height}" />
-            </div>
-        </div>
+			<div class="row">
+				<label for="width">${uiLabel.SETTING_LABEL_SIZE_WIDTH}</label>
+				<input${width_disabled} class="text-numeric" id="width" type="number" step="1" placeholder="0" value="${defaultVal.width}" />
+			</div>
+			<div class="row">
+				<label for="height">${uiLabel.SETTING_LABEL_SIZE_HEIGHT}</label>
+				<input class="text-numeric" id="height" type="number" step="1" placeholder="0" value="${defaultVal.height}" />
+			</div>
+		</div>
 		<h2>${uiLabel.SETTING_LABEL_OFFSET}</h2>
 		<div class="formgroup row">
-            <div class="row">
-                <label for="offsetBottom">${uiLabel.SETTING_LABEL_OFFSET_BOTTOM}</label>
-                <input id="offsetBottom" type="number" step="1" placeholder="0" value="${defaultVal.offsetBottom}" />
-            </div>
+			<div class="row">
+				<label for="offsetBottom">${uiLabel.SETTING_LABEL_OFFSET_BOTTOM}</label>
+				<input class="text-numeric" id="offsetBottom" type="number" step="1" placeholder="0" value="${defaultVal.offsetBottom}" />
+			</div>
 		</div>
-        <p class="note">${uiLabel.SETTING_NOTE}</p>
+		<p class="note">${uiLabel.SETTING_NOTE}</p>
 		<footer>
 			<button id="cancel">Cancel</button>
 			<button id="ok" type="submit" uxp-variant="cta">OK</button>
@@ -84,11 +100,17 @@ function createDialog(defaultVal) {
 `;
 	const dialog = dom('#dialog');
 	const form = dom('#form');
+	const keepCurrent = dom('#keep_current_width')
 	const width = dom('#width');
 	const height = dom('#height');
 	const offsetBottom = dom('#offsetBottom');
 	const cancel = dom('#cancel');
 	const ok = dom('#ok');
+
+	// Toggle width text field
+	keepCurrent.addEventListener('change', e => {
+		width.disabled = e.target.checked;
+	})
 
 	// Cancel button event
 	const cancelDialog = () => dialog.close('reasonCanceled');
@@ -101,7 +123,8 @@ function createDialog(defaultVal) {
 		config.width = width.value;
 		config.height = height.value;
 		config.offsetBottom = offsetBottom.value;
-		dialog.close(config);
+		config.keepCurrent = keepCurrent.checked;
+
 		e.preventDefault();
 	};
 	ok.addEventListener('click', confirmedDialog);
@@ -159,13 +182,11 @@ async function readConfig() {
 	let entry = await openFile();
 
 	if (entry) {
-		console.log('true');
 		return JSON.parse(await entry.read());
 	}
 	else {
-		console.log('false');
 		// Set and return default values if config.json is not found
-		let defaultVal = {"width": 0, "height": 0, "offsetBottom": 0};
+		let defaultVal = {"width": 0, "height": 0, "offsetBottom": 0, "keepCurrent": ""};
 		const pluginDataFolder = await fs.getDataFolder();
 		const buffer = await pluginDataFolder.createFile(configFile);
 		buffer.write(JSON.stringify(defaultVal));

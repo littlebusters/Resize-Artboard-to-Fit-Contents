@@ -77,6 +77,7 @@ async function resizeToFitPluginSettings() {
 			config.width = (validateNum(result.width)) ? Math.abs(result.width - 0) : defaultVal.width;
 			config.height = (validateNum(result.height)) ? Math.abs(result.height - 0) : defaultVal.height;
 			config.offsetBottom = (validateNum(result.offsetBottom)) ? result.offsetBottom - 0 : defaultVal.offsetBottom;
+			config.keepCurrent = result.keepCurrent;
 			await writeConfig(config);
 		}
 		else {
