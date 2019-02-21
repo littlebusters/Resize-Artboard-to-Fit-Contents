@@ -32,21 +32,28 @@ async function resizeToFit(selection) {
 			node.children.forEach(function (childNode) {
 				let objX = -minX;
 				let objY = -minY;
-				if (0 < config.width) objX = 0;
+				if (config.keepCurrent || 0 < config.width) objX = 0;
 				if (0 < config.height) objY = 0;
 				// console.log(objX + ' / ' + objY + '  |  ' + minX + ' / ' + minY + '  |  ' + maxX + ' / ' + maxY);
 				childNode.moveInParentCoordinates(objX, objY);
 			});
 
-			// Get Artboard bounding
+			// Set Artboard bounding
 			let width = maxX - minX;
 			let height = maxY - minY;
-			if (0 < config.width) {
+
+			if (config.keepCurrent) {
+				width = node.boundsInParent.width;
+				minX = 0;
+				minY = 0;
+			}
+			else if (0 < config.width) {
 				width = config.width;
 				minX = 0;
 				minY = 0;
 			}
-			if (0 < config.height) {
+
+			if (!config.keepCurrent && 0 < config.height) {
 				height = config.height;
 				minX = 0;
 				minY = 0;

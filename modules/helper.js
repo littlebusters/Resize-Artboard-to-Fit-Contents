@@ -125,6 +125,7 @@ function createDialog(defaultVal) {
 		config.offsetBottom = offsetBottom.value;
 		config.keepCurrent = keepCurrent.checked;
 
+		dialog.close(config);
 		e.preventDefault();
 	};
 	ok.addEventListener('click', confirmedDialog);
