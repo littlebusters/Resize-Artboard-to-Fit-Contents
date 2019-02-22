@@ -5,13 +5,18 @@ Resize the artboard to fit the boundary of Contents in the artboard in Adobe DX.
 ## Usage
 
 1. Select Artboard(s).
-1. Run the plugin from "Plugins > Resize Artboard > Resize Artboard to Fit Contents (shortcut: ctrl + R)".
+1. Run the plugin from "Plugins > Resize Artboard > Resize Artboard to Fit Contents (shortcut: ctrl + F)".
 
-If you need to fix the Artboard size, you can fix it by "Settings...". 
+If you need to fix the Artboard size or keep the current Artboard width, you can specify it by "Settings...". 
 
 ## Installation
 
+### Direct
+
+[Direct install here](https://xd.adobelanding.com/en/xd-plugin-download/?name=d632ca4d)
+
 ### on XD
+
 1. Open the Plugin panel from "Plugins > Discover Plugins...".
 2. Type "resize artboard" on the search box.
 3. Click to "Install" if find the this plugin.
