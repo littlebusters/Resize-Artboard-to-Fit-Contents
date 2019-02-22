@@ -96,7 +96,7 @@ function createDialog(defaultVal) {
 		</div>
 		<footer>
 			<button id="cancel">Cancel</button>
-			<button id="ok" type="submit" uxp-variant="cta">OK</button>
+			<button id="save" type="submit" uxp-variant="cta">Save</button>
 		</footer>
 	</form>
 	<div class="plugin-icon"></div>
@@ -109,17 +109,16 @@ function createDialog(defaultVal) {
 	const height = dom('#height');
 	const offsetBottom = dom('#offsetBottom');
 	const cancel = dom('#cancel');
-	const ok = dom('#ok');
+	const save = dom('#save');
 
 	// Toggle width text field
 	keepCurrent.addEventListener('change', e => {
 		width.disabled = e.target.checked;
-	})
+	});
 
 	// Cancel button event
 	const cancelDialog = () => dialog.close('reasonCanceled');
 	cancel.addEventListener('click', cancelDialog);
-	cancel.addEventListener('keypress', cancelDialog);
 
 	// OK button event
 	const confirmedDialog = (e) => {
@@ -132,8 +131,7 @@ function createDialog(defaultVal) {
 		dialog.close(config);
 		e.preventDefault();
 	};
-	ok.addEventListener('click', confirmedDialog);
-	ok.addEventListener('keypress', confirmedDialog);
+	save.addEventListener('click', confirmedDialog);
 
 	form.onsubmit = confirmedDialog;
 
@@ -178,7 +176,6 @@ function createAlert(title, msg) {
 	const ok = dom('#ok');
 	const cancelDialog = () => dialog.close();
 	ok.addEventListener('click', cancelDialog);
-	ok.addEventListener('keypress', cancelDialog);
 
 	return dialog;
 }
