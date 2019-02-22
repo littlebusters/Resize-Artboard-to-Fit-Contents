@@ -30,7 +30,7 @@ function createDialog(defaultVal) {
         font-size: 16px;
     }
     h2 {
-        margin-top: 16px;
+        margin-top: 20px;
     }
     label {
         padding-top: 8px;
@@ -49,6 +49,8 @@ function createDialog(defaultVal) {
     		font-size: 14px;
     }
     .note {
+    		margin-top: 0;
+    		margin-left: 0;
         font-size: 12px;
     }
     .plugin-icon {
@@ -72,15 +74,18 @@ function createDialog(defaultVal) {
 			</label>
 		</div>
 		<h2>${uiLabel.SETTING_LABEL_FIXED_SIZE}</h2>
-		<div class="formgroup row">
+		<div class="formgroup">
 			<div class="row">
-				<label for="width">${uiLabel.SETTING_LABEL_SIZE_WIDTH}</label>
-				<input${width_disabled} class="text-numeric" id="width" type="number" step="1" placeholder="0" value="${defaultVal.width}" />
+				<div class="row">
+					<label for="width">${uiLabel.SETTING_LABEL_SIZE_WIDTH}</label>
+					<input${width_disabled} class="text-numeric" id="width" type="number" step="1" placeholder="0" value="${defaultVal.width}" />
+				</div>
+				<div class="row">
+					<label for="height">${uiLabel.SETTING_LABEL_SIZE_HEIGHT}</label>
+					<input class="text-numeric" id="height" type="number" step="1" placeholder="0" value="${defaultVal.height}" />
+				</div>
 			</div>
-			<div class="row">
-				<label for="height">${uiLabel.SETTING_LABEL_SIZE_HEIGHT}</label>
-				<input class="text-numeric" id="height" type="number" step="1" placeholder="0" value="${defaultVal.height}" />
-			</div>
+		<p class="note">${uiLabel.SETTING_NOTE}</p>
 		</div>
 		<h2>${uiLabel.SETTING_LABEL_OFFSET}</h2>
 		<div class="formgroup row">
@@ -89,7 +94,6 @@ function createDialog(defaultVal) {
 				<input class="text-numeric" id="offsetBottom" type="number" step="1" placeholder="0" value="${defaultVal.offsetBottom}" />
 			</div>
 		</div>
-		<p class="note">${uiLabel.SETTING_NOTE}</p>
 		<footer>
 			<button id="cancel">Cancel</button>
 			<button id="ok" type="submit" uxp-variant="cta">OK</button>
