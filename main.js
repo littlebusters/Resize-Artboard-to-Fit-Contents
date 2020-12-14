@@ -1,3 +1,4 @@
+const Scenegraph = require("scenegraph");
 const Artboard = require("scenegraph").Artboard;
 const {validateNum, createDialog, readConfig, writeConfig, createAlert} = require('./modules/helper');
 
