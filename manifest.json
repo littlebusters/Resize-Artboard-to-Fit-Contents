@@ -1,49 +1,71 @@
 {
-   "name": "Resize Artboard to Fit Content",
-   "id": "d632ca4d",
-   "version":"1.2.0",
-   "description":"Resize the artboard to fit the boundary of Contents in the artboard.",
-   "icons":[
-      {
-         "width":96,
-         "height":96,
-         "path":"images/resize-to-fit-icon.png"
-      }
-   ],
-   "host":{
-      "app":"XD",
-      "minVersion":"13.0.0"
-   },
-   "uiEntryPoints":[
-      {
-         "type": "menu",
-         "label": {
+  "name": "Resize Artboard to Fit Content",
+  "id": "d632ca4d",
+  "version":"1.3.0",
+  "description":"Resize the artboard to fit the boundary of Contents in the artboard.",
+  "summary" : "Resize to fit contents.",
+  "keywords" : [ "artboard", "resize", "fit" ],
+  "languages" : [ "en", "ja" ],
+  "author" : "littlebusters",
+  "helpUrl" : "https://github.com/littlebusters/Resize-Artboard-to-Fit-Contents",
+  "main" : "main.js",
+
+  "icons":[
+    {
+      "width":48,
+      "height":48,
+      "path":"images/resize-to-fit-icon-48w.png"
+    },
+    {
+      "width":96,
+      "height":96,
+      "path":"images/resize-to-fit-icon.png"
+    },
+    {
+      "width":144,
+      "height":144,
+      "path":"images/resize-to-fit-icon-144w.png"
+    },
+    {
+      "width":192,
+      "height":192,
+      "path":"images/resize-to-fit-icon-192w.png"
+    }
+  ],
+  "host":{
+    "app":"XD",
+    "minVersion":"13.0.0"
+  },
+  "uiEntryPoints":[
+    {
+      "type": "menu",
+      "label": {
+        "default": "Resize Artboard to Fit Content",
+        "ja": "アートボードリサイズ"
+      },
+      "menuItems": [
+        {
+          "type": "menu",
+          "label": {
             "default": "Resize Artboard to Fit Content",
-            "ja": "アートボードリサイズ"
-         },
-         "menuItems": [
-            {
-               "type": "menu",
-               "label": {
-                  "default": "Resize Artboard to Fit Content",
-                  "ja": "アートボードをコンテンツに合わせる"
-               },
-               "commandId": "ResizeToFit",
-               "shortcut": {
-                  "mac": "Ctrl+F",
-                  "win": "Ctrl+F"
-               }
-            },
-            {
-               "type": "menu",
-               "label": {
-                  "default": "Settings...",
-                  "ja": "設定…"
-               },
-               "commandId": "ResizeToFitSettings",
-               "shortcut": {}
-            }
-         ]
-      }
-   ]
+            "ja": "アートボードをコンテンツに合わせる"
+          },
+          "commandId": "ResizeToFit",
+          "shortcut": {
+            "mac": "Ctrl+F",
+            "win": "Ctrl+F"
+          }
+        },
+        {
+          "type": "menu",
+          "label": {
+            "default": "Settings...",
+            "ja": "設定…"
+          },
+          "commandId": "ResizeToFitSettings",
+          "shortcut": {}
+        }
+      ]
+    }
+  ]
 }
