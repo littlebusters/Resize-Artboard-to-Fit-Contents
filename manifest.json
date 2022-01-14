@@ -59,6 +59,17 @@
         {
           "type": "menu",
           "label": {
+            "default": "Resize Artboard Height to Fit Content"
+          },
+          "commandId": "ResizeHeightToFit",
+          "shortcut": {
+            "mac": "Ctrl+Alt+F",
+            "win": "Ctrl+Alt+F"
+          }
+        },
+        {
+          "type": "menu",
+          "label": {
             "default": "Settings...",
             "ja": "設定…"
           },
