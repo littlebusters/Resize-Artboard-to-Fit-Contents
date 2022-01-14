@@ -1,7 +1,7 @@
 const Artboard = require("scenegraph").Artboard;
 const {validateNum, createDialog, readConfig, writeConfig, createAlert} = require('./modules/helper');
 
-async function resizeToFit(selection) {
+async function resizeToFit(selection, keepCurrent = false) {
 	let sel = selection.items;
 	const selCount = sel.length;
 	if (!selCount) {
@@ -10,6 +10,7 @@ async function resizeToFit(selection) {
 		return false;
 	}
 	let config = await readConfig();
+	config.keepCurrent = (keepCurrent === true) ? true : config.keepCurrent;
 
 	for (let node of sel) {
 		if (0 === node.children.length) continue;
@@ -71,6 +72,10 @@ async function resizeToFit(selection) {
 	}
 }
 
+async function resizeHeightToFit(selection) {
+	await resizeToFit(selection, true);
+}
+
 async function resizeToFitPluginSettings() {
 	const defaultVal = await readConfig();
 	const dialog = createDialog(defaultVal);
@@ -100,6 +105,7 @@ async function resizeToFitPluginSettings() {
 module.exports = {
 	commands: {
 		"ResizeToFit": resizeToFit,
+		"ResizeHeightToFit": resizeHeightToFit,
 		"ResizeToFitSettings": resizeToFitPluginSettings
 	}
 };
